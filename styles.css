@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+  }
+  
+  header {
+    height: 150px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+  
+  .black-header {
+    height: 27.5px;
+    background-color: black;
+    width: 100%;
+    position: relative;
+  }
+  
+  .white-header {
+    height: calc(100% - 27.5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .logo {
+    max-height: 100%;
+    max-width: 100%;
+  }
+  
+  .sign-in-link {
+    color: white;
+    text-decoration: none;
+    line-height: 27.5px;
+    padding: 0 20px;
+    font-family: Verdana, sans-serif;
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translate(0, -50%);
+  }
+  
+  .search-box {
+    margin-left: 20px;
+  }
+  
+  .search-box input[type="text"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 200px;
+  }
+  
+  .search-box button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .search-box button:hover {
+    background-color: #45a049;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+  }
+  
+  .dropdowns select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .dropdowns {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: calc(33vh - 15px);
+  }
+  
+  .dropdown-label {
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+    line-height: 1;
+  }
+  
+  .dropdown-label {
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .search-button {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
