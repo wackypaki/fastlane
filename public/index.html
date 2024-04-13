@@ -18,10 +18,10 @@
       <select name="make" id="makeDropdown">
         <option value="" disabled selected>Make</option>
       </select>
-      <select name="model" id="modelDropdown">
+      <select name="model" id="modelDropdown" disabled>
         <option value="" disabled selected>Model</option>
       </select>
-      <select name="generation" id="generationDropdown">
+      <select name="generation" id="generationDropdown" disabled>
         <option value="" disabled selected>Generation</option>
       </select>
       <input type="text" placeholder="Zip Code" name="zip">
@@ -34,7 +34,42 @@
       const makesDropdown = document.getElementById('makeDropdown');
       const modelsDropdown = document.getElementById('modelDropdown');
       const generationsDropdown = document.getElementById('generationDropdown');
-    
+
+      makesDropdown.addEventListener('change', async () => {
+        const make = makesDropdown.value;
+        modelsDropdown.innerHTML = '<option value="" disabled selected>Loading...</option>';
+        modelsDropdown.disabled = false; // Enable the dropdown
+        const response = await fetch(`/models/${make}`);
+        const models = await response.json();
+        modelsDropdown.innerHTML = '<option value="" disabled selected>Model</option>'; // Reset dropdown
+        models.forEach(model => {
+          const option = document.createElement('option');
+          option.text = model;
+          option.value = model;
+          modelsDropdown.add(option);
+        });
+      });
+
+      modelsDropdown.addEventListener('change', async () => {
+        const model = modelsDropdown.value;
+        generationsDropdown.innerHTML = '<option value="" disabled selected>Loading...</option>';
+        generationsDropdown.disabled = false; // Enable the dropdown
+        const response = await fetch(`/generations/${model}`);
+        if (response.ok) {
+          const generations = await response.json();
+          generationsDropdown.innerHTML = '<option value="" disabled selected>Generation</option>'; // Reset dropdown
+          generations.forEach(generation => {
+            const option = document.createElement('option');
+            option.text = generation;
+            option.value = generation;
+            generationsDropdown.add(option);
+          });
+        } else {
+          console.error('Failed to fetch generations:', response.statusText);
+          generationsDropdown.innerHTML = '<option value="" disabled selected>Error Loading</option>';
+        }
+      });
+
       const fetchMakes = async () => {
         const response = await fetch('/makes');
         const makes = await response.json();
@@ -44,30 +79,8 @@
           makesDropdown.add(option);
         });
       };
-    
-      const fetchModels = async () => {
-        const response = await fetch('/models');
-        const models = await response.json();
-        models.forEach(model => {
-          const option = document.createElement('option');
-          option.text = model;
-          modelsDropdown.add(option);
-        });
-      };
 
-      const fetchGenerations = async () => {
-        const response = await fetch('/generations'); // Assume you have a server endpoint '/generations'
-        const generations = await response.json();
-        generations.forEach(generation => {
-          const option = document.createElement('option');
-          option.text = generation;
-          generationsDropdown.add(option);
-        });
-      };
-    
       await fetchMakes();
-      await fetchModels();
-      await fetchGenerations(); // This needs a corresponding server-side endpoint
     });
   </script>
 </body>

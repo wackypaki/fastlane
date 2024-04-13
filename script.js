@@ -24,13 +24,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
 
   const fetchGenerations = async () => {
-    const response = await fetch('/generations');
-    const generations = await response.json();
-    generations.forEach(generation => {
-      const option = document.createElement('option');
-      option.text = generation;
-      generationsDropdown.add(option);
-    });
+    try {
+      const response = await fetch('/generations');
+      if (response.ok) {
+        const generations = await response.json();
+        generations.forEach(generation => {
+          const option = document.createElement('option');
+          option.text = generation;
+          option.value = generation;
+          generationsDropdown.add(option);
+        });
+      } else {
+        console.error('Failed to fetch generations:', response.statusText);
+        generationsDropdown.innerHTML = '<option value="" disabled selected>Error Loading</option>';
+      }
+    } catch (error) {
+      console.error('Error fetching generations:', error.message);
+      generationsDropdown.innerHTML = '<option value="" disabled selected>Error Loading</option>';
+    }
   };
 
   await fetchMakes();

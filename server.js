@@ -31,25 +31,37 @@ app.get('/makes', async (req, res) => {
   }
 });
 
-app.get('/models', async (req, res) => {
+app.get('/models/:make', async (req, res) => {
+  const makeName = req.params.make;
   try {
-    const { rows } = await pool.query('SELECT name FROM models ORDER BY name');
-    res.json(rows.map(row => row.name));
+      const query = `
+          SELECT m.name
+          FROM models m
+          JOIN makes mk ON m.make_id = mk.id
+          WHERE mk.name = $1;
+      `;
+      const { rows } = await pool.query(query, [makeName]);
+      res.json(rows.map(row => row.name));
   } catch (error) {
-    console.error('Error fetching models:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+      console.error('Error fetching models for make:', error);
+      res.status(500).send('Server error');
   }
 });
 
-app.get('/generations', async (req, res) => {
+app.get('/generations/:model', async (req, res) => {
+  const modelName = req.params.model;
   try {
-    console.log('Fetching generations...');
-    const { rows } = await pool.query('SELECT name FROM generations ORDER BY name');
-    console.log('Generations:', rows);
-    res.json(rows.map(row => row.name));
+      const query = `
+          SELECT g.name
+          FROM generations g
+          JOIN models m ON g.model_id = m.id
+          WHERE m.name = $1; // Make sure this matches the model name exactly
+      `;
+      const { rows } = await pool.query(query, [modelName]);
+      res.json(rows.map(row => row.name));
   } catch (error) {
-    console.error('Error fetching generations:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+      console.error('Error fetching generations:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
