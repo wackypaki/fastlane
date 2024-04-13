@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Header Example</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="black-header">
+      <a href="#" class="sign-in-link">Sign In</a>
+    </div>
+    <div class="white-header">
+      <img src="logo.png" alt="Logo" class="logo">
+    </div>
+  </header>
+  <div class="content">
+    <div class="dropdowns">
+      <select name="year" id="yearDropdown">
+        <option value="" disabled selected>Year</option>
+      </select>
+      <select name="make" id="makeDropdown">
+        <option value="" disabled selected>Make</option>
+      </select>
+      <select name="model" id="modelDropdown">
+        <option value="" disabled selected>Model</option>
+      </select>
+      <input type="text" placeholder="Zip Code" name="zip">
+      <button class="search-button">Search</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const yearsDropdown = document.getElementById('yearDropdown');
+      const makesDropdown = document.getElementById('makeDropdown');
+      const modelsDropdown = document.getElementById('modelDropdown');
+    
+      const fetchYears = async () => {
+        const response = await fetch('/years');
+        const years = await response.json();
+        years.forEach(year => {
+          const option = document.createElement('option');
+          option.text = year;
+          yearsDropdown.add(option);
+        });
+      };
+    
+      const fetchMakes = async () => {
+        const response = await fetch('/makes');
+        const makes = await response.json();
+        makes.forEach(make => {
+          const option = document.createElement('option');
+          option.text = make;
+          makesDropdown.add(option);
+        });
+      };
+    
+      const fetchModels = async () => {
+        const response = await fetch('/models');
+        const models = await response.json();
+        models.forEach(model => {
+          const option = document.createElement('option');
+          option.text = model;
+          modelsDropdown.add(option);
+        });
+      };
+    
+      await fetchYears();
+      await fetchMakes();
+      await fetchModels();
+    });
+  </script>
+</body>
+</html>
