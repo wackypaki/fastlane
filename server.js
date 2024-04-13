@@ -20,15 +20,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './index.html')); // Replace with the correct path if necessary
 });
 
-app.get('/years', async (req, res) => {
-  try {
-    const { rows } = await pool.query('SELECT year FROM years ORDER BY year DESC');
-    res.json(rows.map(row => row.year));
-  } catch (error) {
-    console.error('Error fetching years:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
 
 app.get('/makes', async (req, res) => {
   try {
@@ -46,6 +37,18 @@ app.get('/models', async (req, res) => {
     res.json(rows.map(row => row.name));
   } catch (error) {
     console.error('Error fetching models:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/generations', async (req, res) => {
+  try {
+    console.log('Fetching generations...');
+    const { rows } = await pool.query('SELECT name FROM generations ORDER BY name');
+    console.log('Generations:', rows);
+    res.json(rows.map(row => row.name));
+  } catch (error) {
+    console.error('Error fetching generations:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });

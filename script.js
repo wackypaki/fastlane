@@ -1,17 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  const yearsDropdown = document.getElementById('yearDropdown');
   const makesDropdown = document.getElementById('makeDropdown');
   const modelsDropdown = document.getElementById('modelDropdown');
-
-  const fetchYears = async () => {
-    const response = await fetch('/years');
-    const years = await response.json();
-    years.forEach(year => {
-      const option = document.createElement('option');
-      option.text = year;
-      yearsDropdown.add(option);
-    });
-  };
+  const generationsDropdown = document.getElementById('generationDropdown'); // Update to match your HTML
 
   const fetchMakes = async () => {
     const response = await fetch('/makes');
@@ -33,7 +23,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   };
 
-  await fetchYears();
+  const fetchGenerations = async () => {
+    const response = await fetch('/generations');
+    const generations = await response.json();
+    generations.forEach(generation => {
+      const option = document.createElement('option');
+      option.text = generation;
+      generationsDropdown.add(option);
+    });
+  };
+
   await fetchMakes();
   await fetchModels();
+  await fetchGenerations(); // Call the function to fetch and populate generations dropdown
 });

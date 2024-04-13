@@ -15,14 +15,14 @@
   </header>
   <div class="content">
     <div class="dropdowns">
-      <select name="year" id="yearDropdown">
-        <option value="" disabled selected>Year</option>
-      </select>
       <select name="make" id="makeDropdown">
         <option value="" disabled selected>Make</option>
       </select>
       <select name="model" id="modelDropdown">
         <option value="" disabled selected>Model</option>
+      </select>
+      <select name="generation" id="generationDropdown">
+        <option value="" disabled selected>Generation</option>
       </select>
       <input type="text" placeholder="Zip Code" name="zip">
       <button class="search-button">Search</button>
@@ -31,19 +31,9 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
-      const yearsDropdown = document.getElementById('yearDropdown');
       const makesDropdown = document.getElementById('makeDropdown');
       const modelsDropdown = document.getElementById('modelDropdown');
-    
-      const fetchYears = async () => {
-        const response = await fetch('/years');
-        const years = await response.json();
-        years.forEach(year => {
-          const option = document.createElement('option');
-          option.text = year;
-          yearsDropdown.add(option);
-        });
-      };
+      const generationsDropdown = document.getElementById('generationDropdown');
     
       const fetchMakes = async () => {
         const response = await fetch('/makes');
@@ -64,10 +54,20 @@
           modelsDropdown.add(option);
         });
       };
+
+      const fetchGenerations = async () => {
+        const response = await fetch('/generations'); // Assume you have a server endpoint '/generations'
+        const generations = await response.json();
+        generations.forEach(generation => {
+          const option = document.createElement('option');
+          option.text = generation;
+          generationsDropdown.add(option);
+        });
+      };
     
-      await fetchYears();
       await fetchMakes();
       await fetchModels();
+      await fetchGenerations(); // This needs a corresponding server-side endpoint
     });
   </script>
 </body>
