@@ -44,7 +44,9 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh; /* Adjust height as needed */
+  overflow: hidden; /* Remove scroll */
+  margin-top: 50px; /* Add space between header and dropdowns */
 }
 
 .search-box {
@@ -53,21 +55,39 @@ header {
 }
 
 .search-box input[type="text"] {
-  padding: 5px;
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 3px;
-  width: 150px;
+  border-radius: 5px; /* Add rounded corners */
+  width: 120px; /* Adjust width to match dropdowns */
+  height: 36px; /* Match height to dropdowns */
 }
 
 .search-box button {
-  padding: 5px 10px;
+  padding: 10px; /* Match padding to input field */
   background-color: #4CAF50;
   color: white;
   border: none;
-  border-radius: 3px;
+  border-radius: 5px; /* Add rounded corners */
   cursor: pointer;
 }
 
 .search-box button:hover {
   background-color: #45a049;
+}
+
+/* Dropdown styles */
+.dropdowns select {
+  border-radius: 5px;
+  width: 120px; /* Adjust width as needed */
+  height: 36px; /* Adjust height as needed */
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  font-size: inherit; /* Ensure text size remains the same */
+  text-align: center; /* Center the text */
+  padding: 10px 0; /* Add padding top and bottom */
+  margin: 0 5px; /* Adjust margin to create space between dropdowns */
+}
+
+.dropdowns select:hover {
+  background-color: #ddd;
 }

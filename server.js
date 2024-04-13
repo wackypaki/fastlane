@@ -21,9 +21,17 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/makes', async (req, res) => {
+app.get('/makes/:generation', async (req, res) => {
+  const generation = req.params.generation;
   try {
-    const { rows } = await pool.query('SELECT name FROM makes ORDER BY name');
+    const query = `
+      SELECT DISTINCT mk.name
+      FROM makes mk
+      JOIN models m ON mk.id = m.make_id
+      JOIN generations g ON m.id = g.model_id
+      WHERE g.name = $1;
+    `;
+    const { rows } = await pool.query(query, [generation]);
     res.json(rows.map(row => row.name));
   } catch (error) {
     console.error('Error fetching makes:', error);
@@ -31,37 +39,22 @@ app.get('/makes', async (req, res) => {
   }
 });
 
-app.get('/models/:make', async (req, res) => {
-  const makeName = req.params.make;
+app.get('/models/:generation/:make', async (req, res) => {
+  const generation = req.params.generation;
+  const make = req.params.make;
   try {
-      const query = `
-          SELECT m.name
-          FROM models m
-          JOIN makes mk ON m.make_id = mk.id
-          WHERE mk.name = $1;
-      `;
-      const { rows } = await pool.query(query, [makeName]);
-      res.json(rows.map(row => row.name));
+    const query = `
+      SELECT DISTINCT m.name
+      FROM models m
+      JOIN generations g ON m.id = g.model_id
+      JOIN makes mk ON m.make_id = mk.id
+      WHERE g.name = $1 AND mk.name = $2;
+    `;
+    const { rows } = await pool.query(query, [generation, make]);
+    res.json(rows.map(row => row.name));
   } catch (error) {
-      console.error('Error fetching models for make:', error);
-      res.status(500).send('Server error');
-  }
-});
-
-app.get('/generations/:model', async (req, res) => {
-  const modelName = req.params.model;
-  try {
-      const query = `
-          SELECT g.name
-          FROM generations g
-          JOIN models m ON g.model_id = m.id
-          WHERE m.name = $1; // Make sure this matches the model name exactly
-      `;
-      const { rows } = await pool.query(query, [modelName]);
-      res.json(rows.map(row => row.name));
-  } catch (error) {
-      console.error('Error fetching generations:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+    console.error('Error fetching models:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
