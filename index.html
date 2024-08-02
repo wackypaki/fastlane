@@ -3,23 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vehicle Authority</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Vehicle Listing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles2.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.28.0/dist/umd/supabase.min.js"></script>
+    <script src="initSupabase.js" defer></script>
+    <script src="script2.js" defer></script>
 </head>
 <body>
     <header>
         <div class="logo">
             <img src="logo.png" alt="Vehicle Authority Logo">
             <span>VEHICLE AUTHORITY</span>
-        </div>
-        <div class="sign-in">
-            <a href="#">Sign In</a>
-        </div>
-    </header>
-    <main>
-        <div class="search-container">
-            <input type="text" placeholder="Search...">
-            <button><img src="search-icon.png" alt="Search Icon"></button>
         </div>
         <nav>
             <ul>
@@ -28,21 +24,126 @@
                 <li><a href="#">SELL</a></li>
             </ul>
         </nav>
-        <section class="recent-searches">
-            <h2>Recent Searches</h2>
-            <div class="cars">
-                <div class="car">
-                    <img src="bmw-m3.png" alt="BMW M3">
-                    <p>BMW M3</p>
+    </header>
+    <main>
+        <section class="vehicle-details">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h1 id="vehicle-title">Vehicle Title | $Price</h1>
+                <button class="contact-seller">Contact Seller</button>
+            </div>
+            <div class="main-image">
+                <img src="main.jpg" alt="Vehicle Image">
+            </div>
+            <div class="image-gallery">
+                <h2>Exterior</h2>
+                <div class="images" id="exterior"></div>
+                <h2>Interior</h2>
+                <div class="images" id="interior"></div>
+                <h2>Suspension / Engine / Misc</h2>
+                <div class="images" id="misc"></div>
+            </div>
+            <div class="section price-container">
+                <h2>Price</h2>
+                <div class="section-content">
+                    <table>
+                        <tr>
+                            <td>Asking Price:</td>
+                            <td id="asking-price">$Price</td>
+                        </tr>
+                        <tr>
+                            <td>Average Market Price:</td>
+                            <td id="market-price">$MarketPrice</td>
+                        </tr>
+                        <tr>
+                            <td>Negotiable:</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Price Analysis:</td>
+                            <td id="price-analysis"></td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="car">
-                    <img src="bmw-m3.png" alt="BMW M3">
-                    <p>BMW M3</p>
+                <div class="section price-history">
+                    <h2>Price History</h2>
+                    <div class="section-content">
+                        <canvas id="priceHistoryChart"></canvas> <!-- Add this canvas for the chart -->
+                    </div>
+            </div>
+            <div class="section vehicle-info">
+                <h2>Vehicle Information</h2>
+                <div class="section-content">
+                    <table>
+                        <tr>
+                            <td>VIN</td>
+                            <td class="vin">VIN</td>
+                        </tr>
+                        <tr>
+                            <td>Year / Make / Model</td>
+                            <td class="year-make-model">Year Make Model</td>
+                        </tr>
+                        <tr>
+                            <td>Trim</td>
+                            <td class="trim">Trim</td>
+                        </tr>
+                        <tr>
+                            <td>Body Style</td>
+                            <td class="body_style">Body Style</td>
+                        </tr>
+                        <tr>
+                            <td>Miles</td>
+                            <td class="miles">Miles</td>
+                        </tr>
+                        <tr>
+                            <td>Color</td>
+                            <td class="color">Color</td>
+                        </tr>
+                        <tr>
+                            <td>Title</td>
+                            <td class="title">Title</td>
+                        </tr>
+                        <tr>
+                            <td>Engine</td>
+                            <td class="engine">Engine</td>
+                        </tr>
+                        <tr>
+                            <td>Transmission</td>
+                            <td class="transmission">Transmission</td>
+                        </tr>
+                        <tr>
+                            <td>Number of Pedals</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Registration</td>
+                            <td class="registration">Current</td>
+                        </tr>
+                        <tr>
+                            <td>Location</td>
+                            <td class="location">Location</td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="car">
-                    <img src="ford-mustang.png" alt="Ford Mustang">
-                    <p>Ford Mustang</p>
+            </div>
+            <div class="section seller-description">
+                <h2>Seller's Description</h2>
+                <div class="section-content">
+                    <p class="description">SellerDescription</p>
                 </div>
+            </div>
+            <div class="section maintenance-history">
+                <h2>Maintenance & Vehicle History</h2>
+                <div class="section-content">
+                    <h3>Commonly Occurring Faults</h3>
+                    <table id="common-problems">
+                        <tr>
+                            <th>Problem</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
             </div>
         </section>
     </main>
