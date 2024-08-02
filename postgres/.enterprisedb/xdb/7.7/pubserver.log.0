@@ -1,0 +1,14 @@
+Apr 12, 2024 11:20:41 PM com.edb.replication.common.ServerConf loadConfOptions
+INFO: Loading xdb configuration properties from ../etc\xdb_pubserver.conf
+Apr 12, 2024 11:20:41 PM com.edb.replication.common.ServerConf loadProperties
+INFO: Loading server configuration properties file ../etc\xdb_pubserver.conf...
+Apr 12, 2024 11:20:41 PM com.edb.replication.common.ServerConf loadProperties
+INFO: Loaded server configuration properties file ../etc\xdb_pubserver.conf.
+Apr 12, 2024 11:20:41 PM com.edb.replication.common.ServerConf logModifiedProperties
+INFO: 
+Apr 12, 2024 11:20:41 PM com.edb.replication.backend.ReplicationServer main
+INFO: 
+Apr 12, 2024 11:20:41 PM com.edb.replication.backend.ReplicationServer startPublisherServer
+INFO: Publication server started.
+Apr 12, 2024 11:20:41 PM com.edb.replication.backend.ReplicationServer startPublisherServer
+INFO: Build 7.7.0
