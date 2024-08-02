@@ -1,0 +1,104 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  color: #333;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000;
+  padding: 10px 20px;
+  color: #fff;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+}
+
+header .logo img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+header .sign-in a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.search-container input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  width: 300px;
+}
+
+.search-container button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-left: 0;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+nav ul li {
+  margin: 0 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.recent-searches {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.recent-searches h2 {
+  margin-bottom: 20px;
+}
+
+.recent-searches .cars {
+  display: flex;
+  justify-content: center;
+}
+
+.recent-searches .car {
+  margin: 0 20px;
+  text-align: center;
+}
+
+.recent-searches .car img {
+  width: 150px;
+  height: auto;
+}
+
+.recent-searches .car p {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
