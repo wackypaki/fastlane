@@ -1,26 +1,17 @@
 {
   "name": "fastlane",
   "version": "1.0.0",
-  "description": "Feel free to make changes as you see fit.",
-  "main": "script.js",
+  "description": "A simple vehicle listing app",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "pg": "^8.11.5"
-  }
-}
-
-{
   "dependencies": {
     "@supabase/supabase-js": "^1.28.0",
     "cors": "^2.8.5",
     "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
