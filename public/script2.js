@@ -1,3 +1,4 @@
+// public/script2.js
 import { supabase } from './initSupabase.js'
 
 async function fetchVehicleData() {
@@ -5,7 +6,7 @@ async function fetchVehicleData() {
         const listingId = 3;  // Replace this with dynamic ID if necessary
 
         // Fetch vehicle listing data
-        const { data: vehicleListing, error: listingError } = await window.supabaseClient
+        const { data: vehicleListing, error: listingError } = await supabase
             .from('vehicle_listings')
             .select(`
                 id,
@@ -54,7 +55,7 @@ async function fetchVehicleData() {
         document.querySelector('.registration').textContent = vehicleListing.registration;
 
         // Fetch and display images
-        const { data: images, error: imagesError } = await window.supabaseClient
+        const { data: images, error: imagesError } = await supabase
             .from('images')
             .select('*')
             .eq('listing_id', vehicleListing.id);
@@ -68,7 +69,7 @@ async function fetchVehicleData() {
         displayImages(images, 'misc');
 
         // Fetch and display common faults and their resolution status for this vehicle
-        const { data: vehicleFaults, error: faultsError } = await window.supabaseClient
+        const { data: vehicleFaults, error: faultsError } = await supabase
             .from('vehicle_faults')
             .select('*, common_faults!inner(description)')
             .eq('listing_id', vehicleListing.id);
