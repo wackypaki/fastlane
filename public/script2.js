@@ -1,3 +1,5 @@
+import { supabase } from './initSupabase.js'
+
 async function fetchVehicleData() {
     try {
         const listingId = 3;  // Replace this with dynamic ID if necessary
